@@ -9,7 +9,7 @@ __123123 :)__
     - asdasd
 ertert
 :::
-
+<iframe width="100%" height="600" src="../../codepen.html?path=lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
 ```javascript

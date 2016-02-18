@@ -1,7 +1,7 @@
 ﻿::: aaa
 *here be dragons*
 :::
-<iframe width="100%" height="600" src="/codepen.html?path=/lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="600" src="../../../codepen.html?path=lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 ---
 ---
 __123123 :)__
@@ -71,7 +71,7 @@ asdasdasdasd
 3. Integer molestie lorem at massa
 
 __动手试一试__
-<iframe width="100%" height="600" src="/codepen.html?path=/lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="600" src="../../../codepen.html?path=/lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 You will like those projects!
 
 
