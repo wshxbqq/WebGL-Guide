@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <link href="//cdn.original-fun.com/Libs/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../css/frame.css" rel="stylesheet" />
+    <script src="//cdn.original-fun.com/Libs/jquery/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="//cdn.original-fun.com/Libs/highlight.min.css">
+    <link href="../../../css/github.css" rel="stylesheet" />
+    <script src="//cdn.original-fun.com/Libs/highlight.min.js"></script>
+    <script src="//cdn.original-fun.com/Libs/markdown-it.js"></script>
+
+     
+    <style>
+      
+    </style>
+    
+</head>
+<body>
+    <article class="markdown-body"></article>
+        <script>
+
+            $.get("index.md", function (txt) {
+                var md = window.markdownit({
+                    html: true,
+                    highlight: function (str, lang) {
+                        if (lang && hljs.getLanguage(lang)) {
+                            try {
+                                return '<pre class="hljs ' + lang + '"><code>' +
+                                       hljs.highlight(lang, str, true).value +
+                                       '</code></pre>';
+                            } catch (__) { }
+                        }
+
+                        return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+                    }
+                }).use(container_plugin, 'red').use(container_plugin, 'green').use(container_plugin, 'blue').use(container_plugin, 'yellow');
+                $(".markdown-body").html(md.render(txt));
+             
+            });
+        </script>
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="1-2" data-title="1-2" data-url="http://webgl.wangshaoxing.com/lessons/lesson1/chapter2/index.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+var duoshuoQuery = {short_name:"webgl2016"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</body>
+</html>
