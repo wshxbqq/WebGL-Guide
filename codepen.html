@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Editor</title>
+    <script src="//cdn.original-fun.com/Libs/ace/ace.js"></script>
+    <script src="//cdn.original-fun.com/Libs/jquery/jquery-2.1.1.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            overflow: hidden;
+            background-color:#e8e8e8;
+             margin: 0;
+             padding:0;
+        }
+
+        #editor {
+            margin: 0;
+            position: absolute;
+            top: 0px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="mask" style="position: absolute;top: 0;bottom: 0; right: 0;left: 0;z-index: 9999;"></div>
+    <aside id="t1" style="font-family:Microsoft YaHei;padding:5px;">实验室 No1:旋转的三角形</aside>
+    <article  style="width: 49%;height: 90%;position: absolute;    top: 5%;">
+    <pre id="editor"></pre>
+    </article>
+    <article style="width: 49%; left:50%; height: 90%;position: absolute;background:#fff;top: 5%;">
+        <iframe id="ifr1" style="width:100%;height:100%" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    </article>
+ 
+    <script>
+
+        $("#mask").mousedown(function () {
+
+            $(this).hide();
+            return true;
+        });
+
+        $("body").mouseleave(function () {
+            $("#mask").show();
+            window.clearTimeout(window.tt1);
+
+        });
+
+        $("body").mouseenter(function () {
+           window.tt1= setTimeout(function () {
+                $("#mask").hide();
+            }, 1000);
+
+        });
+  
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]); return null;
+    }
+
+    $("title,#t1").html(GetQueryString("title"));
+
+    $.get(GetQueryString("path"), function (h) {
+        var throttle;
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/chrome");
+        editor.setShowPrintMargin(false);
+        editor.session.setMode("ace/mode/rhtml");
+        editor.insert(h);
+        editor.scrollToRow(999999);
+
+        var innerWindow = ifr1.contentWindow ? ifr1.contentWindow : ifr1;
+
+
+        innerWindow.document.write(editor.getValue());
+        innerWindow.document.close();
+        editor.on("change", function (e) {
+            window.clearTimeout(throttle);
+            throttle = window.setTimeout(function () {
+                var html = editor.getValue();
+                innerWindow.location.reload();
+                setTimeout(function () {
+                    innerWindow.document.write(html);
+                    innerWindow.document.close();
+                }, 10);
+
+                
+            }, 300);
+        });
+
+    })
+
+
+    
+
+
+
+
+    </script>
+
+
+
+
+
+</body>
+</html>
