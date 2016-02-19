@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body>
+    <h3 id="t1"></h3>
+    <div id="svgContainer"></div>
+        
+    
+
+    <script>
+
+        var circleHTML = '<circle cx="{x}" cy="{y}" r="10" stroke="black" stroke-width="2" fill="rgba({color},{color},{color},1)"></circle>';
+        var r = ['<svg id="mysvg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500">'];
+        for (var i = 0; i < 1000; i++) {
+            var c = circleHTML.replace(/\{.*?\}/ig, function (match) {
+                switch (match) {
+                    case "{x}": return Math.random() * 500; break;
+                    case "{y}": return Math.random() * 500; break;
+                    case "{color}": return Math.floor(Math.random() * 255); break;
+                }
+               
+            });
+
+            
+            r.push(c);
+        }
+        r.push('</svg>');
+        
+        svgContainer.innerHTML = r.join('');
+
+        r = [];
+        var mysvg = document.getElementById("mysvg");
+        for (var i = 0; i < mysvg.childNodes.length; i++) {
+            var n = mysvg.childNodes[i];
+            n.direction = 1;
+            n.speed = Math.random()*2;
+            r.push(n);
+        }
+
+        setInterval(function () {
+            for (var i in r) {
+                var n = r[i];
+                if (n.direction>0) {
+                    n.cx.baseVal.value += n.speed;
+                } else {
+                    n.cx.baseVal.value -= n.speed;;
+                }
+               
+                if (n.cx.baseVal.value > 500 || n.cx.baseVal.value < 0) {
+                    n.direction = -n.direction;
+                 
+                }
+               
+                
+            }
+        }, 10);
+
+
+
+
+      
+    </script>
+</body>
+</html>

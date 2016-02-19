@@ -1,51 +1,7 @@
-﻿# 从Canvas 说起
-
-尽管一直在强调 `着色器`是webgl的重点，但是笔者考虑到如果上来直接讲述 `着色器` 可能有些唐突，也不好理解，所以就让我们从比较好理解的 canvas2d API入手，来逐步的进入学习`着色器`的过程。
-`canvas`是HTML5 重要的一个组成部分，在canvas以前，我们只能使用 img  svg 标签 或者 给Dom元素增加背景的方式来显示图片，要么就用flash等插件，（撇开flash不提，因为他不是浏览器范畴的东西）
-这些方式的局限性都非常严重：
-
-+ 每一张图片都是静态的，一旦创建好了便无法更新。就算强行更新其src属性也会有闪动，并且会再发一个网络请求，这样又加重了网络负担。
-+ 每一张图都是一个Dom节点 这对于浏览器来讲 负担严重，有一些动画是无法用dom实现的 比如:放烟花，一个烟花爆炸出几百个小碎片 每个碎片都有自己独立的运动轨迹，很难想象成百上千个div同时执行动画要有多卡。
-+ 都是矩形，显而易见，你无法用dom元素画出自定义的图案。
-
-__这里着重说一下 svg__
-
-svg可以画出矢量的自定义图形，并且他是dom，这使得它具备了所有dom元素应该具有的优势特性，如事件绑定，文本渲染,支持css,你甚至可以给他加上css3属性 让其执行一个动画， 这些都是canvas不具备的，他比较适合于制作弱刷新的应用，所谓弱刷新就是指一旦图片成像完毕，便不需要
-在绘制，就单次绘图成本来讲 svg 是高于canvas的 ，在一些不需要多次刷新的应用中 svg 是比较合适的技术方案 比如 绘制各种报表(饼状图，柱状图，扇形图，折线图，热力图)这些都是弱刷新场景。
-
-<iframe width="100%" height="300" src="../../../codepen.html?path=lessons/lesson1/chapter1/1-1_svg.html&title=第一个 Svg Demo" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-__总结__
-
-|canvas|svg|笔者注释|
-|---|---|---|
-|依赖分辨率|独立于分辨率|canvas在绘图时必须要指定宽高，这就意味着无法做到自动适配，而svg本身其实是dom他可以做到自动适配屏幕。其实这并不是svg的功劳，而是得益于css|
-|不支持事件处理器|支持事件处理器|因为svg是dom 多以可以使用一般dom的 addEventListener 方法给其绑定事件，而canvas现在无法做到这点，你需要手动对其进行事件分发|
-|弱文本渲染能力|最适合具有大渲染面积的应用（谷歌地图）|上文讲了，svg可以适配各种分辨率，所以比较适合地图|
-|可以保存最终图片为PNG或者JPG|复杂图像，重画变慢（任何使用DOM很多的情况都会变慢）|svg 每一个单个节点都是一个dom 所以开销跟定比canvas大很多，渲染速度也会很慢|
-|最适合许多 对象频繁重画的图形游戏 |不适合游戏应用|单词渲染成本决定他是不是可以被用在游戏上|
-
-
-__让我们回到canvas，看看使用canvas 2d api如何完成同样的工作__
-
-
-<iframe width="100%" height="300" src="../../../codepen.html?path=lessons/lesson1/chapter1/1-1_canvas.html&title=让我们用canvas 完成刚才svg一样的功能" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-大家可以清楚地看到代码一下子复杂了很多，主要是因为 canvas 没有为我们进行事件分发，当你点击了canvas时，canvas并不知道你点击了他内里面哪一个子元素，所以你还需要计算。在这里计算方式很简单
-就是当你点击后，`e.clientX` `e.clientY` 拿到你点击的坐标（相对于屏幕左上角） 再通过这些坐标计算它距这3个圆的距离 如果小于半径则判定当前圆被点击。 这种方式即繁琐又容易出错，哪有
-svg的addEventListener 好用呀，但是别着急下结论 让我们看下一个实验。
-
-__1000个动态元素下性能对比__
-
-
-
-
-::: aaa
+﻿::: aaa
 *here be dragons*
 :::
-<iframe width="100%" height="600" src="../../../codepen.html?path=lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
----
+ 
 ---
 __123123 :)__
 ::: red
@@ -53,7 +9,7 @@ __123123 :)__
     - asdasd
 ertert
 :::
-
+<iframe width="100%" height="600" src="../../codepen.html?path=lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
 ```javascript
@@ -114,9 +70,7 @@ asdasdasdasd
 3. Integer molestie lorem at massa
 
 __动手试一试__
-<iframe width="100%" height="600" src="../../../codepen.html?path=/lessons/lesson1/chapter1/dot.html&title=实验室No1:旋转的三角形" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-You will like those projects!
-
+ 
 
 
 ---

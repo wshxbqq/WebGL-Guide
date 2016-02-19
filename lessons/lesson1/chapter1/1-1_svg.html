@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body>
+    <h3>点击svg查看效果</h3>
+    <svg id="mysvg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="150">
+        <circle cx="100" cy="70" r="40" stroke="black" stroke-width="2" fill="red"></circle>
+        <circle cx="200" cy="70" r="40" stroke="black" stroke-width="2" fill="green"></circle>
+        <circle cx="300" cy="70" r="40" stroke="black" stroke-width="2" fill="blue"></circle>
+    </svg>
+
+    <script>
+        mysvg.addEventListener("mousedown", function (e) {
+            var target = e.target;
+            target.setAttribute("r","50");
+        });
+
+        mysvg.addEventListener("mouseup", function (e) {
+            var target = e.target;
+            target.setAttribute("r", "40");
+        });
+    </script>
+</body>
+</html>
