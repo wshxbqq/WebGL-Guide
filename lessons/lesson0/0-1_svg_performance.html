@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="//cdn.original-fun.com/Libs/jquery/jquery-2.1.1.min.js"></script>
+    <style>
+        .t1 {
+            position: fixed;
+            color: red;
+            background: #ccc;
+            font-size: 34px;
+            padding: 20px;
+            z-index:1;
+        }
+
+        .switchBtn {
+                position: absolute;
+                width: 100%;
+                height: 79px;
+                top: 42px;
+                text-align:right;
+        }
+
+            .switchBtn button {
+                    height: 60px;
+                    margin-right:30px;
+                    margin-top: 10px;
+                    border-radius: 11px;
+                    color: #F9F9F9;
+                    background-color:#525252;
+                    cursor:pointer;
+            }
+
+        .switchBtn button.current {
+            background-color: #11BB16;
+            border: 3px #187B2D solid;
+            border-radius: 11px;
+            box-shadow: 0 0 11px rgb(115, 115, 115);
+        }
+
+    </style>
+
+</head>
+
+<body style="overflow:hidden">
+    
+    <div id="switchBtn" class="switchBtn">
+        <button  class="current">从新绘制</button>
+    </div>
+    <h3 id="t1" class="t1"></h3>
+    <div id="svgContainer"></div>
+    
+    
+
+    <script>
+        $(".switchBtn button").click(function () {
+            render();
+
+        });
+
+        function render() {
+            var tStart = new Date();
+            var circleHTML = '<circle cx="{x}" cy="{y}" r="10" stroke="black"   fill="rgba({color},{color},{color},1)"></circle>';
+            var r = ['<svg id="mysvg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500">'];
+            for (var i = 0; i < 10000; i++) {
+                var c = circleHTML.replace(/\{.*?\}/ig, function (match) {
+                    switch (match) {
+                        case "{x}": return Math.random() * 500; break;
+                        case "{y}": return Math.random() * 500; break;
+                        case "{color}": return Math.floor(Math.random() * 255); break;
+                    }
+
+                });
+
+
+                r.push(c);
+            }
+            r.push('</svg>');
+
+            svgContainer.innerHTML = r.join('');
+
+            t1.innerHTML = "消耗时间:" + (new Date() - tStart) + "ms";
+        }
+      
+        setTimeout(function () {
+            render();
+        }, 0);
+ 
+    </script>
+</body>
+</html>

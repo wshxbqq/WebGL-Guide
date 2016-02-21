@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+<body>
+    <h3>canvas 版本 点击圆形 查看效果</h3>
+    <canvas id="canvas" width="500" height="150" style="margin:0px; padding:0px;position:absolute;top:50px;left:0px;"></canvas>
+
+    <script>
+
+        var radius1 = 40;
+        var radius2 = 40;
+        var radius3 = 40;
+        var context = canvas.getContext("2d");
+        function redraw() {
+            context.clearRect(0,0,500,150);
+            context.beginPath();
+            context.arc(100, 70, radius1, 0, Math.PI * 2, true);
+            //不关闭路径路径会一直保留下去，当然也可以利用这个特点做出意想不到的效果
+            context.fillStyle = 'rgba(255,0,0,1)';
+            context.lineWidth = 2;
+            context.strokeStyle = "black"
+            context.fill();
+            context.stroke();
+            context.closePath();
+
+
+            context.beginPath();
+            context.arc(200, 70, radius2, 0, Math.PI * 2, true);
+            context.fillStyle = 'green';
+            context.lineWidth = 2;
+            context.strokeStyle = "black"
+            context.fill();
+            context.stroke();
+            context.closePath();
+
+
+
+            context.beginPath();
+            context.arc(300, 70, radius3, 0, Math.PI * 2, true);
+            context.fillStyle = 'rgba(0,0,255,1)';
+            context.lineWidth = 2;
+            context.strokeStyle = "black"
+            context.fill();
+            context.stroke();
+            context.closePath();
+        }
+
+        redraw(40, 40, 40);
+
+        function getDistance(x,y,x1,y1) {
+            var distance = Math.sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1));
+            return distance;
+        }
+
+        
+        //下面开始绑定方法
+        var currentX;
+        var currentY;
+        canvas.addEventListener("mousedown", function (e) {
+            var target = e.target;
+            currentX = e.clientX - 0;
+            currentY = e.clientY - 50;
+
+            var distance = getDistance(currentX, currentY, 100, 70);
+            if (distance<40) {
+                radius1 = 50;
+            }
+
+            distance = getDistance(currentX, currentY, 200, 70);
+            if (distance < 40) {
+                radius2 = 50;
+            }
+
+            distance = getDistance(currentX, currentY, 300, 70);
+            if (distance < 40) {
+                radius3 = 50;
+            }
+
+            redraw();
+
+        });
+
+        canvas.addEventListener("mouseup", function (e) {
+            radius1 = radius2 = radius3 = 40;
+            redraw();
+        })
+
+    </script>
+</body>
+</html>

@@ -75,6 +75,7 @@ var jsonDATA = [
         "name": "前言",
         "child": [
           { "name": "写在前面的话", "url": "lessons/lesson0/index.html" },
+          { "name": "简单了解浏览器的绘图的几种方式", "url": "lessons/lesson0/chaper1.html" },
           { "name": "如何学习WebGL", "url": "lessons/lesson0/chaper2.html" }
         ]
     }, {
