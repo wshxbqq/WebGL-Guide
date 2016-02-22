@@ -154,8 +154,27 @@ a_Position 将在未来有用处。
 |参数:z|float|z 是指将要绘制的顶点的z坐标 |
 |参数:w|float|是齐次坐标的补充坐标 具体参见`齐次坐标` |
 
-*gl.vertexAttrib4f(a_PositionLocation, 0.0, 0.0, 0.0, 1.0);* 意思就是 将 0.0, 0.0 , 0.0, 1.0 这4个float 类型的数据发送给 a_PositionLocation。再看看上文中的 a_Position定义，
-这样 js就完成了一次和 GLSL的通信。
+*gl.vertexAttrib4f(a_PositionLocation, 0.0, 0.0, 0.0, 1.0);* 意思就是 将 0.0, 0.0 , 0.0, 1.0 这4个float 类型的数据发送给 a_PositionLocation。再看看上文中的 a_PositionLocation定义，
+这样js就完成了一次和 GLSL的通信。当然 `gl.vertexAttrib`还有很多兄弟函数，用于将各种各样的数据传送给GLSL。
+|方法名|说明|
+|---|---|
+|gl.vertexAttrib1f(location,v0)|将一个浮点发送给 attribute 变量|
+|gl.vertexAttrib2f(location,v0,v1)|将两个浮点发送给 attribute 变量|
+|gl.vertexAttrib3f(location,v0,v1,v2)|将三个浮点发送给 attribute 变量|
+|gl.vertexAttrib4f(location,v0,v1,v2,v3)|将四个浮点发送给 attribute 变量|
+|gl.vertexAttrib1i(location,v0)|将一个整数发送给 attribute 变量|
+|... ...|将n个整数发送给 attribute 变量|
+
+这些兄弟函数都是遵循一定规范的，首先都是gl.vertexAttrib前缀开头，然后跟一个变量数，在后跟一个变量类型(f代表float i代表 int)，这些函数还都有另一个数组版本。即第二个参数是一个数组，
+比如 `gl.vertexAttrib4f` 他的 数组版本就是  `gl.vertexAttrib4fv` （后加 'v'）用法为：
+    
+    var floatArr=new Float32Array([0.0,0.0,0.0,1.0])
+    gl.vertexAttrib4fv(location,floatArr);
+
+运行后结果和 gl.vertexAttrib4f(location,0.0 , 0.0 , 0.0 , 1.0); 是一样的。
+
+![](img/1-1_arg_number.png)
+
 
 
 + __webgl的总体绘图流程是__
