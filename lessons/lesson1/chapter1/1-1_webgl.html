@@ -1,0 +1,12 @@
+﻿<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+    <canvas id="canvas" width="500" height="150"></canvas>
+    <script>
+        var gl = canvas.getContext("webgl"); //获取 webgl 上下文
+        gl.clearColor(0.0, 0.0, 1.0, 1.0); //指定 清空颜色
+        gl.clear(gl.COLOR_BUFFER_BIT) //使用纯颜色缓冲来清空画布
+    </script>
+</body>
+</html>

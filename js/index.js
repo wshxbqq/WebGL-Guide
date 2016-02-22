@@ -82,7 +82,7 @@ var jsonDATA = [
         "name": "课程一: 基础知识",
         "child": [
           { "name": "1. 从canvas 2d API说起", "url": "lessons/lesson1/chapter1/index.html" },
-          { "name": "2. 从顶点着色器向片元着色器传信息", "url": "http://tmall.com" }
+          { "name": "2. 最简单的WebGL程序", "url": "lessons/lesson1/chapter2/index.html" }
         ]
     },
 
